@@ -1,10 +1,11 @@
+import Header from '@components/Header'
 import { GlobalStyle } from './global'
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <h1>Meu Template com Styled Components 🚀</h1>
+      <Header />
     </>
   )
 }

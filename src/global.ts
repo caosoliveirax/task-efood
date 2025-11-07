@@ -1,16 +1,28 @@
 import { createGlobalStyle } from 'styled-components'
 
+export const colors = {
+  white: '#FFFFFF',
+  white2: '#FFF8F2',
+  red: '#E66767'
+}
+
 export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Roboto, sans-serif;
+    list-style: none;
   }
 
   body {
-    font-family: sans-serif;
-    background: #f5f5f5;
-    color: #333;
-    text-align: center;
+    background: ${colors.white2};
+    color: ${colors.red};
+  }
+
+  .container {
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
   }
 `
