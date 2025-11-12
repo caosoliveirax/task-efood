@@ -10,9 +10,10 @@ const RestaurantsList = ({ restaurants }: Props) => (
   <div className="container">
     <List>
       {restaurants.map((restaurant) => (
-        <li>
+        <li key={restaurant.id}>
           <RestaurantItem
-            key={restaurant.id}
+            id={restaurant.id}
+            category={restaurant.category}
             name={restaurant.name}
             rating={restaurant.rating}
             description={restaurant.description}

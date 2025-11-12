@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 export const colors = {
   white: '#FFFFFF',
@@ -28,7 +28,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .container-fh {
-    height: 100%;
+    height:100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -36,4 +36,8 @@ export const GlobalStyle = createGlobalStyle`
     text-align: center;
     padding: 40px 0px;
   }
+  `
+
+export const CardContainer = styled.div`
+  position: relative;
 `
