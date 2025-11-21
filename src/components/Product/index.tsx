@@ -11,15 +11,24 @@ type Props = {
   porcao: string
 }
 
-const Products = ({ nome, foto, descricao }: Props) => (
-  <CardContainer>
-    <Image src={foto} alt={nome} />
-    <Wrapper>
-      <Title>{nome}</Title>
-      <Description>{descricao}</Description>
-      <Button type="button">Adicionar ao carrinho</Button>
-    </Wrapper>
-  </CardContainer>
-)
+const Products = ({ nome, foto, descricao }: Props) => {
+  const getDescription = (descricao: string) => {
+    if (descricao.length > 164) {
+      return descricao.slice(0, 161) + '...'
+    }
+    return descricao
+  }
+
+  return (
+    <CardContainer>
+      <Image src={foto} alt={nome} />
+      <Wrapper>
+        <Title>{nome}</Title>
+        <Description>{getDescription(descricao)}</Description>
+        <Button type="button">Adicionar ao carrinho</Button>
+      </Wrapper>
+    </CardContainer>
+  )
+}
 
 export default Products
