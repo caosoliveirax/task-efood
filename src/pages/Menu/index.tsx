@@ -22,7 +22,7 @@ const Menu = () => {
     return (
       <>
         <Header size="small" />
-        <h3 className="container">Restaurante não encontrado.</h3>
+        <h3 className="container">Carregando</h3>
       </>
     )
   }
