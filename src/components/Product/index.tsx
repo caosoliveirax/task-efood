@@ -26,7 +26,11 @@ const Products = ({ nome, foto, descricao, aoClicar }: Props) => {
       <Wrapper>
         <Title>{nome}</Title>
         <Description>{getDescription(descricao)}</Description>
-        <Button onClick={aoClicar} type="button">
+        <Button
+          title="Clique para ver mais detalhes"
+          onClick={aoClicar}
+          type="button"
+        >
           Mais detalhes
         </Button>
       </Wrapper>

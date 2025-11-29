@@ -41,7 +41,11 @@ const Restaurant = ({
         <Title>{titulo}</Title>
         <Rating>{avaliacao}</Rating>
         <Description>{getDescription(descricao)}</Description>
-        <Button type="link" to={`/menu/${id}`}>
+        <Button
+          title="Clique aqui para mais detalhes"
+          type="link"
+          to={`/menu/${id}`}
+        >
           Saiba mais
         </Button>
       </Wrapper>

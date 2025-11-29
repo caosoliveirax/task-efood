@@ -44,3 +44,13 @@ export const NavLink = styled(Link)`
   font-weight: 900;
   text-decoration: none;
 `
+
+export const CartLink = styled.button`
+  display: block;
+  color: ${colors.primary};
+  font-size: 18px;
+  font-weight: 900;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`

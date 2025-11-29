@@ -1,17 +1,13 @@
+import { useState } from 'react'
 import ProductItem from '@components/Product'
-import {
-  BannerRestaurant,
-  Category,
-  List,
-  Modal,
-  ModalContent,
-  Title
-} from './styles'
+import * as S from './styles'
 
 import close from '../../assets/images/close.png'
 import type { Restaurant } from 'pages/Home'
 import Button from '@components/Button'
-import { useState } from 'react'
+
+import { add, open } from '../../store/reducers/cart'
+import { useDispatch } from 'react-redux'
 
 export type Props = {
   banner: string
@@ -25,18 +21,28 @@ export type ModalState = {
   menu: Restaurant['cardapio'][number] | null
 }
 
+export const priceFormatter = (price = 0) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(price)
+}
+
 const ProductsList = ({ menu, banner, category, title }: Props) => {
-  const priceFormatter = (price = 0) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(price)
-  }
+  const dispatch = useDispatch()
 
   const [modal, setModal] = useState<ModalState>({
     isVisible: false,
     menu: null
   })
+
+  const addProductCart = () => {
+    if (modal.menu) {
+      dispatch(add(modal.menu))
+      dispatch(open())
+      closeModal()
+    }
+  }
 
   const closeModal = () => {
     setModal({ isVisible: false, menu: null })
@@ -44,14 +50,14 @@ const ProductsList = ({ menu, banner, category, title }: Props) => {
 
   return (
     <>
-      <BannerRestaurant style={{ backgroundImage: `url(${banner})` }}>
+      <S.BannerRestaurant style={{ backgroundImage: `url(${banner})` }}>
         <div className="container">
-          <Category>{category}</Category>
-          <Title>{title}</Title>
+          <S.Category>{category}</S.Category>
+          <S.Title>{title}</S.Title>
         </div>
-      </BannerRestaurant>
+      </S.BannerRestaurant>
       <div className="container">
-        <List>
+        <S.List>
           {menu.map((prato) => (
             <li key={prato.id}>
               <ProductItem
@@ -65,10 +71,10 @@ const ProductsList = ({ menu, banner, category, title }: Props) => {
               />
             </li>
           ))}
-        </List>
+        </S.List>
       </div>
-      <Modal className={modal.isVisible ? 'visible' : ''}>
-        <ModalContent className="container">
+      <S.Modal className={modal.isVisible ? 'visible' : ''}>
+        <S.ModalContent className="container">
           <img
             src={modal.menu?.foto}
             alt={`Foto do prato ${modal.menu?.nome}`}
@@ -85,13 +91,17 @@ const ProductsList = ({ menu, banner, category, title }: Props) => {
             <h4>{modal.menu?.nome}</h4>
             <p>{modal.menu?.descricao}</p>
             <p>Serve: de {modal.menu?.porcao}</p>
-            <Button type="button">
+            <Button
+              onClick={addProductCart}
+              title="Clique para adicionar ao carrinho"
+              type="button"
+            >
               Adicionar ao carrinho - {priceFormatter(modal.menu?.preco)}
             </Button>
           </div>
-        </ModalContent>
+        </S.ModalContent>
         <div onClick={() => closeModal()} className="overlay"></div>
-      </Modal>
+      </S.Modal>
     </>
   )
 }
