@@ -35,6 +35,14 @@ export const Sidebar = styled.aside`
   background-color: ${colors.primary};
   overflow-x: auto;
   z-index: 1;
+
+  .empty-text {
+    margin-top: 32px;
+    font-size: 14px;
+    line-height: 22px;
+    color: ${colors.white};
+    text-align: center;
+  }
 `
 
 export const CartItem = styled.li`
