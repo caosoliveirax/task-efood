@@ -16,6 +16,11 @@ export const Container = styled.div`
 export const TitleCheckout = styled.h3`
   font-size: 16px;
   margin-bottom: 16px;
+  display: flex;
+
+  span {
+    margin-left: 4px;
+  }
 `
 
 export const InputWrapper = styled.div`
@@ -34,10 +39,11 @@ export const InputWrapper = styled.div`
     color: ${colors.beige};
     border: none;
     padding: 8px;
+    color: #4b4b4b;
+    font-weight: 700;
 
-    &:focus {
-      color: #4b4b4b;
-      font-weight: 700;
+    &.error {
+      border: 2px solid red;
     }
   }
 `
