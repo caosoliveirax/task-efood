@@ -3,11 +3,12 @@ import ProductsList from '@components/ProductsList'
 import Header from '@components/Header'
 import Cart from '@components/Cart'
 import { useGetRestaurantQuery } from '../../services/api'
+import Loader from '@components/Loader'
 
 const Menu = () => {
   const { id } = useParams()
 
-  const { data: restaurant } = useGetRestaurantQuery(id as string)
+  const { data: restaurant, isLoading } = useGetRestaurantQuery(id as string)
 
   if (restaurant) {
     return (
@@ -27,7 +28,8 @@ const Menu = () => {
   return (
     <>
       <Header size="small" />
-      <h3 className="container">Carregando</h3>
+      <Cart />
+      {isLoading && <Loader />}
     </>
   )
 }

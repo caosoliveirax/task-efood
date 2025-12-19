@@ -3,18 +3,14 @@ import Header from '@components/Header'
 import { useGetRestaurantsQuery } from '../../services/api'
 
 const Home = () => {
-  const { data: restaurants } = useGetRestaurantsQuery()
+  const { data: restaurants, isLoading } = useGetRestaurantsQuery()
 
-  if (restaurants) {
-    return (
-      <>
-        <Header size="big" />
-        <RestaurantsList restaurants={restaurants} />
-      </>
-    )
-  }
-
-  return <h4>Carregando...</h4>
+  return (
+    <>
+      <Header size="big" />
+      <RestaurantsList isLoading={isLoading} restaurants={restaurants || []} />
+    </>
+  )
 }
 
 export default Home
