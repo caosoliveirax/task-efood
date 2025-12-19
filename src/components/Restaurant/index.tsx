@@ -1,8 +1,8 @@
 import Tag from '@components/Tag'
-import { Description, Image, Wrapper, Title, Infos } from './styles'
 import Rating from '@components/Rating'
-import { CardContainer } from '../../global'
 import Button from '@components/Button'
+import { CardContainer } from '../../global'
+import * as S from './styles'
 
 type Props = {
   id: number
@@ -32,15 +32,15 @@ const Restaurant = ({
 
   return (
     <CardContainer>
-      <Image src={capa} alt={titulo} />
-      <Infos>
+      <S.Image src={capa} alt={titulo} />
+      <S.Infos>
         {destacado === true && <Tag>Destaque da semana</Tag>}
         <Tag>{tipo}</Tag>
-      </Infos>
-      <Wrapper>
-        <Title>{titulo}</Title>
+      </S.Infos>
+      <S.Wrapper>
+        <S.Title>{titulo}</S.Title>
         <Rating>{avaliacao}</Rating>
-        <Description>{getDescription(descricao)}</Description>
+        <S.Description>{getDescription(descricao)}</S.Description>
         <Button
           title="Clique aqui para mais detalhes"
           type="link"
@@ -48,7 +48,7 @@ const Restaurant = ({
         >
           Saiba mais
         </Button>
-      </Wrapper>
+      </S.Wrapper>
     </CardContainer>
   )
 }

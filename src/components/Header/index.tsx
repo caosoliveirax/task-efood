@@ -1,17 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux'
 
-import {
-  Image as BannerImage,
-  CartLink,
-  Description,
-  HeaderContainer,
-  NavLink
-} from './styles'
-import banner from '../../assets/images/banner.jpg'
 import Logo from '@components/Logo'
 
-import { open } from '../../store/reducers/cart'
+import banner from '../../assets/images/banner.jpg'
+
 import type { RootReducer } from 'store'
+import { open } from '../../store/reducers/cart'
+
+import * as S from './styles'
 
 export type Props = {
   size: 'big' | 'small'
@@ -26,28 +22,28 @@ const Header = ({ size }: Props) => {
   }
 
   return (
-    <HeaderContainer size={size}>
-      <BannerImage style={{ backgroundImage: `url(${banner})` }}>
+    <S.HeaderContainer size={size}>
+      <S.Image style={{ backgroundImage: `url(${banner})` }}>
         <div className="container container-fh">
           {size === 'big' ? (
             <>
               <Logo />
-              <Description>
+              <S.Description>
                 Viva experiências gastronômicas no conforto da sua casa
-              </Description>
+              </S.Description>
             </>
           ) : (
             <>
-              <NavLink to="/">Restaurantes</NavLink>
+              <S.NavLink to="/">Restaurantes</S.NavLink>
               <Logo />
-              <CartLink onClick={openCart} type="button">
+              <S.CartLink onClick={openCart} type="button">
                 {items.length} - produto(s) no carrinho
-              </CartLink>
+              </S.CartLink>
             </>
           )}
         </div>
-      </BannerImage>
-    </HeaderContainer>
+      </S.Image>
+    </S.HeaderContainer>
   )
 }
 

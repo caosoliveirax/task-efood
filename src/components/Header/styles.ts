@@ -1,9 +1,8 @@
-import { styled } from 'styled-components'
-
-import type { Props } from '.'
 import { Link } from 'react-router-dom'
+import { styled } from 'styled-components'
 import { colors } from '../../global'
 import { LinkLogo } from '@components/Logo/styles'
+import type { Props } from '.'
 
 export const HeaderContainer = styled.header<Props>`
   height: ${(props) => (props.size === 'big' ? '360px' : '162px')};

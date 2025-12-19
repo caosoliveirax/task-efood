@@ -1,6 +1,6 @@
-import { colors } from '../../global'
 import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
+import { colors } from '../../global'
 
 export const ButtonContainer = styled.button`
   width: 100%;

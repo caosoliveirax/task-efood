@@ -1,8 +1,8 @@
-import { GlobalStyle } from './global'
-import { BrowserRouter } from 'react-router-dom'
-import Routers from './routers'
-import Footer from '@components/Footer'
 import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+import { GlobalStyle } from './global'
+import Footer from '@components/Footer'
+import Routers from './routers'
 import { store } from './store'
 
 function App() {

@@ -3,19 +3,11 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { IMaskInput } from 'react-imask'
 import { useSelector } from 'react-redux'
-
 import Button from '@components/Button'
-import {
-  ButtonsWrapper,
-  Container,
-  InputWrapper,
-  RowWrapper,
-  TitleCheckout
-} from './styles'
 import { usePurchaseMutation } from '../../services/api'
 import type { RootReducer } from 'store'
-import { Navigate } from 'react-router-dom'
 import { parseToBrl, totalCartPrice } from '@utils/index'
+import * as S from './styles'
 
 type CheckoutProps = {
   onBackToCart: () => void
@@ -125,12 +117,8 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
     return hasError
   }
 
-  if (items.length === 0 && !isSuccess) {
-    return <Navigate to="/" />
-  }
-
   return (
-    <Container>
+    <S.Container>
       {isSuccess ? (
         <>
           <p>Pedido concluido!</p>
@@ -140,8 +128,8 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
           <form onSubmit={form.handleSubmit}>
             {!toPayment ? (
               <>
-                <TitleCheckout>Entrega</TitleCheckout>
-                <InputWrapper>
+                <S.TitleCheckout>Entrega</S.TitleCheckout>
+                <S.InputWrapper>
                   <label htmlFor="fullName">Quem irá receber</label>
                   <input
                     id="fullName"
@@ -152,8 +140,8 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError('fullName') ? 'error' : ''}
                   />
-                </InputWrapper>
-                <InputWrapper>
+                </S.InputWrapper>
+                <S.InputWrapper>
                   <label htmlFor="address">Endereço</label>
                   <input
                     id="address"
@@ -164,8 +152,8 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError('address') ? 'error' : ''}
                   />
-                </InputWrapper>
-                <InputWrapper>
+                </S.InputWrapper>
+                <S.InputWrapper>
                   <label htmlFor="city">Cidade</label>
                   <input
                     id="city"
@@ -176,9 +164,9 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError('city') ? 'error' : ''}
                   />
-                </InputWrapper>
-                <RowWrapper>
-                  <InputWrapper>
+                </S.InputWrapper>
+                <S.RowWrapper>
+                  <S.InputWrapper>
                     <label htmlFor="zipCode">CEP</label>
                     <IMaskInput
                       mask="00000-000"
@@ -190,8 +178,8 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                       onBlur={form.handleBlur}
                       className={checkInputHasError('zipCode') ? 'error' : ''}
                     />
-                  </InputWrapper>
-                  <InputWrapper>
+                  </S.InputWrapper>
+                  <S.InputWrapper>
                     <label htmlFor="numberAddress">Número</label>
                     <input
                       id="numberAddress"
@@ -204,9 +192,9 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                         checkInputHasError('numberAddress') ? 'error' : ''
                       }
                     />
-                  </InputWrapper>
-                </RowWrapper>
-                <InputWrapper>
+                  </S.InputWrapper>
+                </S.RowWrapper>
+                <S.InputWrapper>
                   <label htmlFor="complement">Complemento (opcional)</label>
                   <input
                     id="complement"
@@ -217,8 +205,8 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError('complement') ? 'error' : ''}
                   />
-                </InputWrapper>
-                <ButtonsWrapper>
+                </S.InputWrapper>
+                <S.ButtonsWrapper>
                   <Button
                     onClick={handleContinueToPayment}
                     title="Clique aqui para continuar para o pagamento"
@@ -233,17 +221,17 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                   >
                     Voltar para o carrinho
                   </Button>
-                </ButtonsWrapper>
+                </S.ButtonsWrapper>
               </>
             ) : (
               <>
-                <TitleCheckout>
+                <S.TitleCheckout>
                   Pagamento{' '}
                   <span>
                     - Valor a pagar {parseToBrl(totalCartPrice(items))}
                   </span>
-                </TitleCheckout>
-                <InputWrapper>
+                </S.TitleCheckout>
+                <S.InputWrapper>
                   <label htmlFor="cardName">Nome no cartão</label>
                   <input
                     id="cardName"
@@ -254,9 +242,9 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError('cardName') ? 'error' : ''}
                   />
-                </InputWrapper>
-                <RowWrapper>
-                  <InputWrapper>
+                </S.InputWrapper>
+                <S.RowWrapper>
+                  <S.InputWrapper>
                     <label htmlFor="cardNumber">Número do cartão</label>
                     <IMaskInput
                       mask="0000 0000 0000 0000"
@@ -270,8 +258,8 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                         checkInputHasError('cardNumber') ? 'error' : ''
                       }
                     />
-                  </InputWrapper>
-                  <InputWrapper>
+                  </S.InputWrapper>
+                  <S.InputWrapper>
                     <label htmlFor="cardCode">CVV</label>
                     <IMaskInput
                       mask="000"
@@ -283,10 +271,10 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                       onBlur={form.handleBlur}
                       className={checkInputHasError('cardCode') ? 'error' : ''}
                     />
-                  </InputWrapper>
-                </RowWrapper>
-                <RowWrapper>
-                  <InputWrapper>
+                  </S.InputWrapper>
+                </S.RowWrapper>
+                <S.RowWrapper>
+                  <S.InputWrapper>
                     <label htmlFor="expiresMonth">Mês de vencimento</label>
                     <IMaskInput
                       mask="00"
@@ -300,8 +288,8 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                         checkInputHasError('expiresMonth') ? 'error' : ''
                       }
                     />
-                  </InputWrapper>
-                  <InputWrapper>
+                  </S.InputWrapper>
+                  <S.InputWrapper>
                     <label htmlFor="expiresYear">Ano de vencimento</label>
                     <IMaskInput
                       mask="00"
@@ -315,9 +303,9 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                         checkInputHasError('expiresYear') ? 'error' : ''
                       }
                     />
-                  </InputWrapper>
-                </RowWrapper>
-                <ButtonsWrapper>
+                  </S.InputWrapper>
+                </S.RowWrapper>
+                <S.ButtonsWrapper>
                   <Button
                     onClick={form.handleSubmit}
                     title="Clique aqui para finalizar o pagamento"
@@ -335,13 +323,13 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                   >
                     Voltar para a edição de endereço
                   </Button>
-                </ButtonsWrapper>
+                </S.ButtonsWrapper>
               </>
             )}
           </form>
         </>
       )}
-    </Container>
+    </S.Container>
   )
 }
 

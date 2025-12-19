@@ -1,5 +1,5 @@
-import { colors } from '../../global'
 import { styled } from 'styled-components'
+import { colors } from '../../global'
 import trash from '../../assets/images/delete.png'
 
 export const CartContainer = styled.div`

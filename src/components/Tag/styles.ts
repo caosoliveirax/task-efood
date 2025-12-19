@@ -1,5 +1,5 @@
-import { colors } from '../../global'
 import { styled } from 'styled-components'
+import { colors } from '../../global'
 
 export const TagContainer = styled.div`
   display: inline-block;

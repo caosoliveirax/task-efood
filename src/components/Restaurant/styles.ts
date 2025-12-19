@@ -1,5 +1,5 @@
-import { colors } from '../../global'
 import styled from 'styled-components'
+import { colors } from '../../global'
 
 export const Image = styled.img`
   width: 100%;

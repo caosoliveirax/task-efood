@@ -1,15 +1,14 @@
-import { Container, FooterDescription, ListLinks } from './styles'
-
+import Logo from '@components/Logo'
 import facebook from '../../assets/images/facebook.png'
 import instagram from '../../assets/images/instagram.png'
 import x from '../../assets/images/x.png'
-import Logo from '@components/Logo'
+import * as S from './styles'
 
 const Footer = () => (
-  <Container>
+  <S.Container>
     <div className="container container-fh">
       <Logo />
-      <ListLinks>
+      <S.ListLinks>
         <li>
           <a href="#">
             <img src={facebook} alt="Logo do facebook" />
@@ -25,14 +24,14 @@ const Footer = () => (
             <img src={x} alt="Logo do X/Twitter" />
           </a>
         </li>
-      </ListLinks>
-      <FooterDescription>
+      </S.ListLinks>
+      <S.FooterDescription>
         A efood é uma plataforma para divulgação de estabelecimentos, a
         responsabilidade pela entrega, qualidade dos produtos é toda do
         estabelecimento contratado.
-      </FooterDescription>
+      </S.FooterDescription>
     </div>
-  </Container>
+  </S.Container>
 )
 
 export default Footer

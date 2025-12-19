@@ -1,13 +1,11 @@
+import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import ProductItem from '@components/Product'
-import * as S from './styles'
-
-import close from '../../assets/images/close.png'
 import Button from '@components/Button'
-
+import close from '../../assets/images/close.png'
 import { add, open } from '../../store/reducers/cart'
-import { useDispatch } from 'react-redux'
 import { parseToBrl } from '@utils/index'
+import * as S from './styles'
 
 export type Props = {
   banner: string

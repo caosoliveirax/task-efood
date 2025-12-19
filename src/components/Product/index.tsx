@@ -1,6 +1,7 @@
 import Button from '@components/Button'
+
 import { CardContainer } from '../../global'
-import { Wrapper, Image, Title, Description } from './styles'
+import * as S from './styles'
 
 type Props = {
   id: number
@@ -22,10 +23,10 @@ const Products = ({ nome, foto, descricao, aoClicar }: Props) => {
 
   return (
     <CardContainer>
-      <Image src={foto} alt={nome} />
-      <Wrapper>
-        <Title>{nome}</Title>
-        <Description>{getDescription(descricao)}</Description>
+      <S.Image src={foto} alt={nome} />
+      <S.Wrapper>
+        <S.Title>{nome}</S.Title>
+        <S.Description>{getDescription(descricao)}</S.Description>
         <Button
           title="Clique para ver mais detalhes"
           onClick={aoClicar}
@@ -33,7 +34,7 @@ const Products = ({ nome, foto, descricao, aoClicar }: Props) => {
         >
           Mais detalhes
         </Button>
-      </Wrapper>
+      </S.Wrapper>
     </CardContainer>
   )
 }

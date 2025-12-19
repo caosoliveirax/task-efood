@@ -1,4 +1,5 @@
 import logo from '../../assets/images/logo.png'
+
 import { LinkLogo } from './styles'
 
 const Logo = () => (

@@ -1,6 +1,6 @@
+import { styled } from 'styled-components'
 import { ButtonContainer } from '@components/Button/styles'
 import { colors } from '../../global'
-import { styled } from 'styled-components'
 
 export const Container = styled.div`
   color: ${colors.beige};

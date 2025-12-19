@@ -1,15 +1,15 @@
-import { RatingContainer, Score } from './styles'
 import star from '../../assets/images/star.png'
+import * as S from './styles'
 
 type Props = {
   children: string
 }
 
 const Rating = ({ children }: Props) => (
-  <RatingContainer>
-    <Score>{children}</Score>
+  <S.RatingContainer>
+    <S.Score>{children}</S.Score>
     <img src={star} alt="Estrela de avaliação" />
-  </RatingContainer>
+  </S.RatingContainer>
 )
 
 export default Rating

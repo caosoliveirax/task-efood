@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-
 import { List as ListProducts } from '@components/RestaurantsList/styles'
 import { colors } from '../../global'
 
