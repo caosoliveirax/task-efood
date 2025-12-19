@@ -5,9 +5,9 @@ import Button from '@components/Button'
 import type { RootReducer } from 'store'
 
 import { close, remove } from '../../store/reducers/cart'
-import { priceFormatter } from '@components/ProductsList'
 import Checkout from '@components/Checkout'
 import { useState } from 'react'
+import { parseToBrl, totalCartPrice } from '@utils/index'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
@@ -22,26 +22,13 @@ const Cart = () => {
     dispatch(close())
   }
 
-  const totalCartPrice = () => {
-    return items.reduce((acumulador, valorAtual) => {
-      return (acumulador += valorAtual.preco)
-    }, 0)
-  }
-
   return (
     <S.CartContainer className={isOpen ? 'is-open' : ''}>
       <S.Overlay onClick={closeCart} />
       <S.Sidebar>
         {showCheckout ? (
           <>
-            <Checkout />
-            <Button
-              onClick={() => setShowCheckout(false)}
-              title="Clique aqui para retornar ao carrinho"
-              type="button"
-            >
-              Voltar para o carrinho
-            </Button>
+            <Checkout onBackToCart={() => setShowCheckout(false)} />
           </>
         ) : (
           <>
@@ -53,7 +40,7 @@ const Cart = () => {
                       <img src={item.foto} />
                       <div>
                         <h3>{item.nome}</h3>
-                        <span>{priceFormatter(item.preco)}</span>
+                        <span>{parseToBrl(item.preco)}</span>
                       </div>
                       <button
                         onClick={() => removeItem(item.id)}
@@ -64,7 +51,7 @@ const Cart = () => {
                 </ul>
                 <S.TotalPriceInfo>
                   <p>Valor total</p>
-                  <span>{priceFormatter(totalCartPrice())}</span>
+                  <span>{parseToBrl(totalCartPrice(items))}</span>
                 </S.TotalPriceInfo>
                 <Button
                   onClick={() => setShowCheckout(true)}

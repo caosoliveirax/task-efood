@@ -3,11 +3,11 @@ import ProductItem from '@components/Product'
 import * as S from './styles'
 
 import close from '../../assets/images/close.png'
-import type { Restaurant } from 'pages/Home'
 import Button from '@components/Button'
 
 import { add, open } from '../../store/reducers/cart'
 import { useDispatch } from 'react-redux'
+import { parseToBrl } from '@utils/index'
 
 export type Props = {
   banner: string
@@ -19,13 +19,6 @@ export type Props = {
 export type ModalState = {
   isVisible: boolean
   menu: Restaurant['cardapio'][number] | null
-}
-
-export const priceFormatter = (price = 0) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(price)
 }
 
 const ProductsList = ({ menu, banner, category, title }: Props) => {
@@ -96,7 +89,7 @@ const ProductsList = ({ menu, banner, category, title }: Props) => {
               title="Clique para adicionar ao carrinho"
               type="button"
             >
-              Adicionar ao carrinho - {priceFormatter(modal.menu?.preco)}
+              Adicionar ao carrinho - {parseToBrl(modal.menu?.preco)}
             </Button>
           </div>
         </S.ModalContent>

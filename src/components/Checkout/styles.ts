@@ -6,11 +6,6 @@ export const Container = styled.div`
   color: ${colors.beige};
   font-weight: 700;
   padding: 16px 0 0 0;
-
-  ${ButtonContainer} {
-    margin-top: 24px;
-    margin-bottom: 8px;
-  }
 `
 
 export const TitleCheckout = styled.h3`
@@ -51,4 +46,12 @@ export const InputWrapper = styled.div`
 export const RowWrapper = styled.div`
   display: flex;
   column-gap: 32px;
+`
+
+export const ButtonsWrapper = styled.div`
+  margin-top: 24px;
+
+  ${ButtonContainer} {
+    margin-bottom: 8px;
+  }
 `

@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { Restaurant } from '../pages/Home'
 
 type Product = {
   id: number
@@ -13,8 +12,17 @@ type PurchasePayload = {
     address: string
     city: string
     zipCode: string
-    numberAddress: number
+    numberAddress: string
     complement?: string
+  }
+  payment: {
+    card: {
+      cardName: string
+      cardNumber: number
+      cardCode: number
+      expiresMonth: number
+      expiresYear: number
+    }
   }
 }
 
