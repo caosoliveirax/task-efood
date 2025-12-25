@@ -48,6 +48,15 @@ export const RowWrapper = styled.div`
   column-gap: 32px;
 `
 
+export const TextWrapper = styled.div`
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+`
+
 export const ButtonsWrapper = styled.div`
   margin-top: 24px;
 

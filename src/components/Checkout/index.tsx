@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { IMaskInput } from 'react-imask'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Button from '@components/Button'
 import { usePurchaseMutation } from '../../services/api'
 import type { RootReducer } from 'store'
 import { parseToBrl, totalCartPrice } from '@utils/index'
+import { clear, close } from '../../store/reducers/cart'
 import * as S from './styles'
 
 type CheckoutProps = {
@@ -16,7 +17,9 @@ type CheckoutProps = {
 const Checkout = ({ onBackToCart }: CheckoutProps) => {
   const [toPayment, setToPayment] = useState(false)
   const { items } = useSelector((state: RootReducer) => state.cart)
-  const [purchase, { isSuccess, isLoading }] = usePurchaseMutation()
+  const [purchase, { data, isSuccess, isLoading, reset }] =
+    usePurchaseMutation()
+  const dispatch = useDispatch()
 
   const form = useFormik({
     initialValues: {
@@ -48,19 +51,21 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
         .required('Campo obrigatório'),
       complement: Yup.string(),
       cardName: toPayment
-        ? Yup.string().required('Campo obrigatório')
+        ? Yup.string()
+            .min(3, 'Mínimo de 3 caracteres')
+            .required('Campo obrigatório')
         : Yup.string(),
       cardNumber: toPayment
-        ? Yup.string().required('Campo obrigatório')
+        ? Yup.string().min(19).max(19).required('Campo obrigatório')
         : Yup.string(),
       cardCode: toPayment
-        ? Yup.string().required('Campo obrigatório')
+        ? Yup.string().min(3).max(3).required('Campo obrigatório')
         : Yup.string(),
       expiresMonth: toPayment
-        ? Yup.string().required('Campo obrigatório')
+        ? Yup.string().min(2).max(2).required('Campo obrigatório')
         : Yup.string(),
       expiresYear: toPayment
-        ? Yup.string().required('Campo obrigatório')
+        ? Yup.string().min(2).max(2).required('Campo obrigatório')
         : Yup.string()
     }),
     onSubmit: (values) => {
@@ -117,11 +122,51 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
     return hasError
   }
 
+  const finishPurchase = () => {
+    dispatch(close())
+    onBackToCart()
+    reset()
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clear())
+    }
+  }, [isSuccess, dispatch])
+
   return (
     <S.Container>
-      {isSuccess ? (
+      {isSuccess && data ? (
         <>
-          <p>Pedido concluido!</p>
+          <S.TitleCheckout>Pedido realizado - {data.orderId}</S.TitleCheckout>
+          <S.TextWrapper>
+            <p>
+              Estamos felizes em informar que seu pedido já está em processo de
+              preparação e, em breve, será entregue no endereço fornecido.
+            </p>
+            <p>
+              Gostaríamos de ressaltar que nossos entregadores não estão
+              autorizados a realizar cobranças extras.
+            </p>
+            <p>
+              Lembre-se da importância de higienizar as mãos após o recebimento
+              do pedido, garantindo assim sua segurança e bem-estar durante a
+              refeição.
+            </p>
+            <p>
+              Esperamos que desfrute de uma deliciosa e agradável experiência
+              gastronômica. Bom apetite!
+            </p>
+          </S.TextWrapper>
+          <S.ButtonsWrapper>
+            <Button
+              onClick={finishPurchase}
+              title="Clique aqui para concluir o pedido"
+              type="button"
+            >
+              Concluir
+            </Button>
+          </S.ButtonsWrapper>
         </>
       ) : (
         <>

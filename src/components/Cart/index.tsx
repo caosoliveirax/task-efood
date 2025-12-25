@@ -20,9 +20,15 @@ const Cart = () => {
     dispatch(close())
   }
 
+  const handleOverlayClick = () => {
+    if (!showCheckout) {
+      closeCart()
+    }
+  }
+
   return (
     <S.CartContainer className={isOpen ? 'is-open' : ''}>
-      <S.Overlay onClick={closeCart} />
+      <S.Overlay onClick={handleOverlayClick} />
       <S.Sidebar>
         {showCheckout ? (
           <>
