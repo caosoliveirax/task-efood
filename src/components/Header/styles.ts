@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 import { colors } from '../../global'
 import { LinkLogo } from '@components/Logo/styles'
 import type { Props } from '.'
+import { ButtonContainer } from '@components/Button/styles'
 
 export const HeaderContainer = styled.header<Props>`
   height: ${(props) => (props.size === 'big' ? '360px' : '162px')};
@@ -36,12 +36,13 @@ export const Description = styled.p`
   margin-top: 138.5px;
 `
 
-export const NavLink = styled(Link)`
+export const NavLink = styled.span`
   display: block;
   color: ${colors.primary};
   font-size: 18px;
   font-weight: 900;
   text-decoration: none;
+  cursor: pointer;
 `
 
 export const CartLink = styled.button`
@@ -52,4 +53,36 @@ export const CartLink = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
+`
+
+export const CheckCartModal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 620px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: ${colors.primary};
+  background-color: ${colors.beige};
+  z-index: 1000;
+
+  p {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+`
+
+export const Wrapper = styled.div`
+  display: flex;
+  gap: 40px;
+
+  ${ButtonContainer} {
+    padding: 12px 20px;
+    background-color: ${colors.primary};
+    color: ${colors.white};
+  }
 `

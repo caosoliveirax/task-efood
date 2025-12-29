@@ -2,12 +2,11 @@ import { useParams } from 'react-router-dom'
 import ProductsList from '@components/ProductsList'
 import Header from '@components/Header'
 import Cart from '@components/Cart'
-import { useGetRestaurantQuery } from '../../services/api'
 import Loader from '@components/Loader'
+import { useGetRestaurantQuery } from '../../services/api'
 
 const Menu = () => {
   const { id } = useParams()
-
   const { data: restaurant, isLoading } = useGetRestaurantQuery(id as string)
 
   if (restaurant) {
