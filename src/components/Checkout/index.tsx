@@ -48,6 +48,10 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
       zipCode: Yup.string().min(9).max(9).required('Campo obrigatório'),
       numberAddress: Yup.string()
         .min(1, 'Mínimo de 1 caracteres')
+        .matches(
+          /^[0-9]+$/,
+          'Apenas números são permitidos (use o complemento para letras)'
+        )
         .required('Campo obrigatório'),
       complement: Yup.string(),
       cardName: toPayment
@@ -71,26 +75,29 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
     onSubmit: (values) => {
       purchase({
         delivery: {
-          fullName: values.fullName,
-          address: values.address,
-          city: values.city,
-          zipCode: values.zipCode,
-          numberAddress: values.numberAddress,
-          complement: values.complement
+          receiver: values.fullName,
+          address: {
+            description: values.address,
+            city: values.city,
+            zipCode: values.zipCode,
+            number: Number(values.numberAddress),
+            complement: values.complement
+          }
         },
         payment: {
           card: {
-            cardName: values.cardName,
-            cardNumber: Number(values.cardNumber.split(' ').join('')),
-            cardCode: Number(values.cardCode),
-            expiresMonth: Number(values.expiresMonth),
-            expiresYear: Number(values.expiresYear)
+            name: values.cardName,
+            number: Number(values.cardNumber.split(' ').join('')),
+            code: Number(values.cardCode),
+            expires: {
+              month: Number(values.expiresMonth),
+              year: Number(values.expiresYear)
+            }
           }
         },
         products: items.map((item) => ({
           id: item.id,
-          price: item.preco,
-          nome: item.nome
+          price: item.preco
         }))
       })
     }
@@ -229,7 +236,7 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
                     <input
                       id="numberAddress"
                       name="numberAddress"
-                      type="text"
+                      type="number"
                       value={form.values.numberAddress}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}

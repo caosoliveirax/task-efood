@@ -8,20 +8,24 @@ type Product = {
 type PurchasePayload = {
   products: Product[]
   delivery: {
-    fullName: string
-    address: string
-    city: string
-    zipCode: string
-    numberAddress: string
-    complement?: string
+    receiver: string
+    address: {
+      description: string
+      city: string
+      zipCode: string
+      number: number
+      complement?: string
+    }
   }
   payment: {
     card: {
-      cardName: string
-      cardNumber: number
-      cardCode: number
-      expiresMonth: number
-      expiresYear: number
+      name: string
+      number: number
+      code: number
+      expires: {
+        month: number
+        year: number
+      }
     }
   }
 }
@@ -32,7 +36,9 @@ type PurchaseResponse = {
 
 const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api-ebac.vercel.app/api/efood'
+    // Api principal com problemas, quando voltar, descomentar a linha
+    // baseUrl: 'https://api-ebac.vercel.app/api/efood'
+    baseUrl: 'https://fake-api-havokk.vercel.app/api/efood'
   }),
   endpoints: (builder) => ({
     getRestaurants: builder.query<Restaurant[], void>({
