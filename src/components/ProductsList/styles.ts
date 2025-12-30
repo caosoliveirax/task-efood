@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { List as ListProducts } from '@components/RestaurantsList/styles'
-import { colors } from '../../global'
+import { breakpoints, colors } from '../../global'
 
 export const BannerRestaurant = styled.div`
   position: relative;
@@ -47,6 +47,10 @@ export const List = styled(ListProducts)`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 32px;
   margin-top: 56px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const Modal = styled.div`
@@ -85,12 +89,22 @@ export const ModalContent = styled.div`
   position: relative;
   z-index: 1;
 
+  @media (max-width: ${breakpoints.desktop}) {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+  }
+
   .wrapper {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     gap: 16px;
     margin-left: 24px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      margin-left: 0;
+    }
   }
 
   img {
@@ -112,6 +126,10 @@ export const ModalContent = styled.div`
   h4 {
     font-size: 18px;
     font-weight: 900;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      margin-top: 16px;
+    }
   }
 
   p {
@@ -124,5 +142,9 @@ export const ModalContent = styled.div`
     bottom: 32px;
     width: max-content;
     margin-bottom: 27px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      position: static;
+    }
   }
 `

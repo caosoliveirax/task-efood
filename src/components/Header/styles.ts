@@ -1,11 +1,15 @@
 import { styled } from 'styled-components'
-import { colors } from '../../global'
+import { breakpoints, colors } from '../../global'
 import { LinkLogo } from '@components/Logo/styles'
 import type { Props } from '.'
 import { ButtonContainer } from '@components/Button/styles'
 
 export const HeaderContainer = styled.header<Props>`
   height: ${(props) => (props.size === 'big' ? '360px' : '162px')};
+
+  @media (max-width: ${breakpoints.desktop}) {
+    height: ${(props) => (props.size === 'big' ? '280px' : '154px')};
+  }
 
   .container-fh {
     ${(props) =>
@@ -14,11 +18,24 @@ export const HeaderContainer = styled.header<Props>`
         justify-content: space-between;
         padding-bottom: 60px;`
         : ``}
+
+    @media (max-width: ${breakpoints.desktop}) {
+      ${(props) =>
+        props.size === 'small'
+          ? `
+          padding-bottom: 40px;`
+          : ``}
+    }
   }
 
   ${LinkLogo} {
     ${(props) =>
       props.size === 'small' ? `margin-left: 102px;` : `margin-left: 0;`}
+
+    @media (max-width: ${breakpoints.desktop}) {
+      ${(props) =>
+        props.size === 'small' ? `margin-left: 14px;` : `margin-left: 0;`}
+    }
   }
 `
 
@@ -34,6 +51,11 @@ export const Description = styled.p`
   font-weight: 900;
   font-size: 36px;
   margin-top: 138.5px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 24px;
+    margin-top: 0px;
+  }
 `
 
 export const NavLink = styled.span`
@@ -43,6 +65,10 @@ export const NavLink = styled.span`
   font-weight: 900;
   text-decoration: none;
   cursor: pointer;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 16px;
+  }
 `
 
 export const CartLink = styled.button`
@@ -53,6 +79,10 @@ export const CartLink = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 14px;
+  }
 `
 
 export const CheckCartModal = styled.div`
@@ -68,6 +98,10 @@ export const CheckCartModal = styled.div`
   color: ${colors.primary};
   background-color: ${colors.beige};
   z-index: 1000;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 90%;
+  }
 
   p {
     font-size: 18px;

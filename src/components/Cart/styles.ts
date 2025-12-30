@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { colors } from '../../global'
+import { breakpoints, colors } from '../../global'
 import trash from '../../assets/images/delete.png'
 
 export const CartContainer = styled.div`
@@ -12,6 +12,12 @@ export const CartContainer = styled.div`
   height: 100%;
   justify-content: flex-end;
   z-index: 2;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    height: auto;
+    bottom: 0;
+    top: inherit;
+  }
 
   &.is-open {
     display: flex;
