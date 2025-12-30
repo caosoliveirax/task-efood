@@ -9,6 +9,7 @@ import type { RootReducer } from 'store'
 import { parseToBrl, totalCartPrice } from '@utils/index'
 import { clear, close } from '../../store/reducers/cart'
 import * as S from './styles'
+import { useNavigate } from 'react-router-dom'
 
 type CheckoutProps = {
   onBackToCart: () => void
@@ -19,6 +20,7 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
   const { items } = useSelector((state: RootReducer) => state.cart)
   const [purchase, { data, isSuccess, isLoading, reset }] =
     usePurchaseMutation()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const form = useFormik({
@@ -133,6 +135,7 @@ const Checkout = ({ onBackToCart }: CheckoutProps) => {
     dispatch(close())
     onBackToCart()
     reset()
+    navigate('/')
   }
 
   useEffect(() => {
